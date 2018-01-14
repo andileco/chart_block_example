@@ -48,5 +48,7 @@ function chart_block_example_theme() {
  * @param $variables
  */
 function template_preprocess_chart_block_example(&$variables) {
-  $moduleSelector = new ModuleSelector($variables['library'], $variables['categories'], $variables['seriesData'], $variables['options'], [], $variables, 'xyz');
+  $plugin_manager = \Drupal::service('plugin.manager.charts');
+  $plugin = $plugin_manager->createInstance($variables['library']);
+  $plugin->buildVariables($variables['options'], $variables['categories'], $variables['seriesData'], [], $variables, 'xyz');
 }
